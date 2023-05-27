@@ -1,14 +1,29 @@
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { useContext } from "react";
 
 const Navbar = () => {
-  const navOptions =
-    <>
-      <li><Link to={'/'}>Home</Link></li>
-      <li><Link to={'/menu'}>Our Menu</Link></li>
-      <li><Link to={'/order/salad'}>Order Food</Link></li>
-      <li><Link to={'/login'}>Log in</Link></li>
-    </>
+  const { user, logOut } = useContext(AuthContext);
 
+  const handleLogOut = () => {
+    logOut()
+    .then(() => {})
+    .catch(error => console.log(error.message));
+  };
+
+  const navOptions = (
+    <>
+      <li>
+        <Link to={"/"}>Home</Link>
+      </li>
+      <li>
+        <Link to={"/menu"}>Our Menu</Link>
+      </li>
+      <li>
+        <Link to={"/order/salad"}>Order Food</Link>
+      </li>
+    </>
+  );
 
   return (
     <>
@@ -41,12 +56,21 @@ const Navbar = () => {
           <a className="btn btn-ghost normal-case text-xl">Bistro Boss</a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {navOptions}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn">Get started</a>
+          {user ? (
+            <button
+              onClick={handleLogOut}
+              className="btn btn-error btn-outline"
+            >
+              Log Out
+            </button>
+          ) : (
+            <Link className="btn btn-primary" to={"/login"}>
+              Log in
+            </Link>
+          )}
         </div>
       </div>
     </>
