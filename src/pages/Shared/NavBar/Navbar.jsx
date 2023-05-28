@@ -1,26 +1,40 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { useContext } from "react";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../Hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
 
   const handleLogOut = () => {
     logOut()
-    .then(() => {})
-    .catch(error => console.log(error.message));
+      .then(() => {})
+      .catch((error) => console.log(error.message));
   };
 
   const navOptions = (
     <>
       <li>
-        <Link to={"/"}>Home</Link>
+        <NavLink to={"/"}
+          className={({ isActive }) => (isActive ? "active" : "")}
+        > Home </NavLink>
       </li>
       <li>
-        <Link to={"/menu"}>Our Menu</Link>
+        <NavLink to={"/menu"}
+          className={({ isActive }) => (isActive ? "active" : "")}
+        > Our Menu </NavLink>
       </li>
       <li>
-        <Link to={"/order/salad"}>Order Food</Link>
+        <NavLink to={"/order/salad"}
+          className={({ isActive }) => (isActive ? "active" : "")}
+        > Order Food </NavLink>
+      </li>
+      <li>
+        <NavLink to={"/secret"}
+          className={({ isActive }) => (isActive ? "active" : "")}
+        > Persona </NavLink>
       </li>
     </>
   );
@@ -58,14 +72,29 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
-        <div className="navbar-end">
-          {user ? (
-            <button
-              onClick={handleLogOut}
-              className="btn btn-error btn-outline"
-            >
-              Log Out
+        <div className="navbar-end gap-2">
+          <Link to={"/dashboard/mycart"}>
+            <button className="btn gap-2">
+              <FaShoppingCart />
+              <div className="badge badge-secondary">+{cart?.length || 0}</div>
             </button>
+          </Link>
+
+          {user ? (
+            <div className="flex gap-2 items-center">
+              <button
+                onClick={handleLogOut}
+                className="btn btn-info"
+              >
+                Log Out
+              </button>
+              <div
+                className="tooltip tooltip-bottom"
+                data-tip={user?.displayName}
+              >
+                <img className="rounded-full" src={user?.photoURL} alt="" />
+              </div>
+            </div>
           ) : (
             <Link className="btn btn-primary" to={"/login"}>
               Log in

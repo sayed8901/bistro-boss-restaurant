@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import {
   loadCaptchaEnginge,
@@ -6,14 +6,16 @@ import {
   validateCaptcha,
 } from "react-simple-captcha";
 import { AuthContext } from "../../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const captchaRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
-
   const { signIn } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const fromLocation = location.state?.from?.pathname || "/";
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -21,11 +23,21 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    
+
     signIn(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        Swal.fire({
+          title: "User login successful.",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+        navigate(fromLocation, { replace: true });
       })
       .catch((error) => {
         console.log(error.message);
@@ -36,8 +48,8 @@ const Login = () => {
     loadCaptchaEnginge(6);
   }, []);
 
-  const handleValidateCaptcha = () => {
-    const user_captcha_value = captchaRef.current.value;
+  const handleValidateCaptcha = (event) => {
+    const user_captcha_value = event.target.value;
     console.log(user_captcha_value);
     if (validateCaptcha(user_captcha_value)) {
       setDisabled(false);
@@ -99,24 +111,24 @@ const Login = () => {
                 </label>
 
                 <input
-                  ref={captchaRef}
+                  onBlur={handleValidateCaptcha}
                   type="text"
                   name="captcha"
                   placeholder="Type the captcha code above"
                   className="input input-bordered"
                 />
-                <div className="text-right mt-2">
+                {/* <div className="text-right mt-2">
                   <button
-                    onClick={handleValidateCaptcha}
                     className="btn btn-outline btn-info btn-xs"
                   >
                     Validate Captcha
                   </button>
-                </div>
+                </div> */}
               </div>
+              {/* ToDo: need to uncomment disable attribute (hints: it has been temporarily turned off for implementing cart operation ) */}
               <div className="form-control mt-6">
                 <input
-                  disabled={disabled}
+                  // disabled={disabled}
                   className="btn btn-primary"
                   type="submit"
                   value="Login"
