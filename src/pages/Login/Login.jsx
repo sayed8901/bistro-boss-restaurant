@@ -131,7 +131,7 @@ const Login = () => {
               {/* ToDo: need to uncomment disable attribute (hints: it has been temporarily turned off for implementing cart operation ) */}
               <div className="form-control mt-6">
                 <input
-                  disabled={disabled}
+                  disabled={false}
                   className="btn btn-primary"
                   type="submit"
                   value="Login"
