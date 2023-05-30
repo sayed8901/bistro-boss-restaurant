@@ -9,10 +9,12 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const { signIn } = useContext(AuthContext);
+
   const location = useLocation();
   const navigate = useNavigate();
   const fromLocation = location.state?.from?.pathname || "/";
@@ -125,6 +127,7 @@ const Login = () => {
                   </button>
                 </div> */}
               </div>
+
               {/* ToDo: need to uncomment disable attribute (hints: it has been temporarily turned off for implementing cart operation ) */}
               <div className="form-control mt-6">
                 <input
@@ -135,7 +138,7 @@ const Login = () => {
                 />
               </div>
             </form>
-            <p className="text-center mb-4">
+            <p className="text-center">
               <small>
                 New Here?{" "}
                 <Link
@@ -146,6 +149,8 @@ const Login = () => {
                 </Link>
               </small>
             </p>
+            
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

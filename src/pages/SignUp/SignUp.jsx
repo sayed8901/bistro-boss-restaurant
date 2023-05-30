@@ -4,42 +4,62 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm();
 
-  const {createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
+
     createUser(data.email, data.password)
-    .then(result => {
+      .then((result) => {
         const loggedUser = result.user;
         console.log(loggedUser);
+
         updateUserProfile(data.name, data.photoURL)
-        .then(() => {
-          console.log('user profile updated successfully!')
-          reset();
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'User created successfully.',
-            showConfirmButton: false,
-            timer: 1500
+          .then(() => {
+            console.log("user profile updated successfully!");
+
+            // saving user info to the mongoDB users collection
+            const savedUser = { name: data.name, email: data.email };
+            fetch(`http://localhost:5000/users`, {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(savedUser)
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                if (data.insertedId) {
+                  reset();
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "User created successfully.",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+
+                  navigate("/");
+                }
+              });
           })
-          navigate('/');
-        })
-        .catch(error => error.message)
+          .catch((error) => error.message);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.message);
-      })
+      });
   };
 
   return (
@@ -143,7 +163,7 @@ const SignUp = () => {
                   </a>
                 </label>
               </div>
-              <div className="form-control mt-6">
+              <div className="form-control">
                 <input
                   className="btn btn-primary"
                   type="submit"
@@ -151,7 +171,7 @@ const SignUp = () => {
                 />
               </div>
             </form>
-            <p className="text-center mb-4">
+            <p className="text-center">
               <small>
                 Already Have an Account?{" "}
                 <Link className="hover:text-purple-500 font-bold" to={"/login"}>
@@ -159,6 +179,8 @@ const SignUp = () => {
                 </Link>
               </small>
             </p>
+
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

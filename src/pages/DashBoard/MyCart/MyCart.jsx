@@ -40,7 +40,7 @@ const MyCart = () => {
   };
 
   return (
-    <div className="w-full px-8 min-h-full">
+    <div className="w-full px-16 min-h-full">
       <Helmet>
         <title>Bistro Boss | My Cart</title>
       </Helmet>
@@ -73,9 +73,9 @@ const MyCart = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {cart.map((item, i) => (
+              {cart.map((item, index) => (
                 <tr key={item._id}>
-                  <td>{1 + i}</td>
+                  <td>{1 + index}</td>
                   <td>
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
@@ -87,12 +87,9 @@ const MyCart = () => {
                   <td className="text-end">${item.price}</td>
                   <td>
                     <button
-                      onClick={() => {
-                        handleDelete(item);
-                      }}
-                      className="btn btn-error bg-red-600 text-white"
-                    >
-                      <FaTrashAlt />
+                      onClick={() => {handleDelete(item)}}
+                      className="btn btn-error bg-red-600 text-white text-xl"
+                    > <FaTrashAlt />
                     </button>
                   </td>
                 </tr>
