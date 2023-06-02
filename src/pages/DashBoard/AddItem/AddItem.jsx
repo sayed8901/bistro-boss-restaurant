@@ -62,7 +62,7 @@ const AddItem = () => {
   console.log(errors);
 
   return (
-    <div className="w-full px-16">
+    <div className="w-full px-8">
       <Helmet>
         <title>Bistro Boss | Add Item</title>
       </Helmet>

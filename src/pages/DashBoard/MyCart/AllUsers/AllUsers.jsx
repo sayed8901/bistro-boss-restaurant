@@ -66,7 +66,7 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="w-full px-16 min-h-full">
+    <div className="w-full px-8 min-h-full">
       <Helmet>
         <title>Bistro Boss | All Users</title>
       </Helmet>

@@ -13,12 +13,12 @@ import {
 import axios from "axios";
 
 export const AuthContext = createContext(null);
+const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const auth = getAuth(app);
   const GoogleProvider = new GoogleAuthProvider();
 
   const createUser = (email, password) => {
@@ -61,9 +61,8 @@ const AuthProvider = ({ children }) => {
   // observe user state change
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log("auth state change", currentUser);
       setUser(currentUser);
-      setLoading(false);
+      console.log("auth state change", currentUser);
 
       // get and set token
       if(currentUser){
@@ -84,7 +83,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, [auth]);
+  }, []);
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

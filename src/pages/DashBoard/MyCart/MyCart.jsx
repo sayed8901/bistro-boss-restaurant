@@ -40,7 +40,7 @@ const MyCart = () => {
   };
 
   return (
-    <div className="w-full px-16 min-h-full">
+    <div className="w-full px-8 min-h-full">
       <Helmet>
         <title>Bistro Boss | My Cart</title>
       </Helmet>
@@ -51,10 +51,10 @@ const MyCart = () => {
       ></SectionTitle>
 
       <div className="my-16">
-        <div className="uppercase font-bold flex justify-around mb-8">
+        <div className="uppercase font-bold flex justify-around items-center mb-8">
           <h3 className="text-2xl">Total Orders: {cart.length}</h3>
           <h3 className="text-2xl">Total Price:{total}</h3>
-          <button className="btn btn-warning font-semibold text-white text-xl">
+          <button className="btn btn-warning font-semibold text-xl">
             Pay
           </button>
         </div>
