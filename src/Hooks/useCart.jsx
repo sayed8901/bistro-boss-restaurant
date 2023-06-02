@@ -12,6 +12,9 @@ const useCart = () => {
   const { refetch, data: cart=[]} = useQuery({
     queryKey: ["carts", user?.email],
     enabled: !loading,
+
+    // normal fetching
+
     // queryFn: async () => {
     //     const res = await fetch(`http://localhost:5000/carts?email=${user?.email}`, {
     //       method: 'GET',
@@ -26,6 +29,8 @@ const useCart = () => {
     //     return res.json();
     //   },
 
+
+    // alternatively, fetching using tanstack react query with axiosSecure
     queryFn: async () => {
         const res = await axiosSecure(`/carts?email=${user?.email}`);
         console.log('response from axios', res);

@@ -17,7 +17,7 @@ const DashBoard = () => {
         {/* Page content here */}
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden ml-auto mr-16"
+          className="btn btn-primary drawer-button fixed top-5 right-5 z-10 lg:hidden ml-auto mr-16"
         >
           Open drawer
         </label>
@@ -32,7 +32,7 @@ const DashBoard = () => {
             isAdmin 
               ? <>
                   <li><NavLink to={'/dashboard/adminHome'}><FaHome/> Admin Home </NavLink> </li>
-                  <li><NavLink to={'/dashboard/addItems'}><FaUtensils/> Add Items </NavLink> </li>
+                  <li><NavLink to={'/dashboard/addItem'}><FaUtensils/> Add an Item </NavLink> </li>
                   <li><NavLink to={'/dashboard/manageItems'}><FaWallet/> Manage Items </NavLink></li>
                   <li><NavLink to={'/dashboard/manageBookings'}><FaBook/> Manage Bookings </NavLink></li> 
                   <li><NavLink to={'/dashboard/allUsers'}><FaUsers/> All Users </NavLink></li> 
