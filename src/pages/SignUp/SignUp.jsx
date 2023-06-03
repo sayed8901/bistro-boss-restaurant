@@ -31,7 +31,7 @@ const SignUp = () => {
 
             // saving user info to the mongoDB users collection
             const savedUser = { name: data.name, email: data.email };
-            fetch(`http://localhost:5000/users`, {
+            fetch(`https://bistro-boss-server-virid.vercel.app/users`, {
               method: "POST",
               headers: {
                 "content-type": "application/json",
