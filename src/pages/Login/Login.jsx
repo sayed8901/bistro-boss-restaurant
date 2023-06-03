@@ -27,17 +27,17 @@ const Login = () => {
     console.log(email, password);
 
     signIn(email, password)
-      .then((result) => {
-        const user = result.user;
-        console.log(user);
+    .then((result) => {
+      const user = result.user;
+      console.log(user);
+      navigate(fromLocation, { replace: true });
         Swal.fire({
           position: "center",
           icon: "success",
           title: "User login successful",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1500,
         });
-        navigate(fromLocation, { replace: true });
       })
       .catch((error) => {
         console.log(error.message);

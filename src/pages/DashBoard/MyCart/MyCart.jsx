@@ -59,7 +59,7 @@ const MyCart = () => {
         </div>
 
         <div className="overflow-x-auto w-full">
-          <table className="table w-full">
+          <table className="table w-full mb-8">
             {/* head */}
             <thead>
               <tr>

@@ -3,9 +3,11 @@ import { AuthContext } from "../../../providers/AuthProvider";
 import { useContext } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../Hooks/useCart";
+import useAdmin from "../../../Hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
 
   const handleLogOut = () => {
@@ -32,9 +34,10 @@ const Navbar = () => {
         > Order Food </NavLink>
       </li>
       <li>
-        <NavLink to={"/secret"}
+        <NavLink
+          to={isAdmin ? "/dashboard/adminHome" : "/dashboard/userHome"}
           className={({ isActive }) => (isActive ? "active" : "")}
-        > Persona </NavLink>
+        > Dashboard </NavLink>
       </li>
     </>
   );
@@ -67,13 +70,15 @@ const Navbar = () => {
               {navOptions}
             </ul>
           </div>
-          <Link to={'/'} className="btn btn-ghost normal-case text-xl">Bistro Boss</Link>
+          <Link to={"/"} className="btn btn-ghost normal-case text-xl">
+            Bistro Boss
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end gap-2">
-          <Link to={user ? "/dashboard/mycart" : "/menu"}>
+          <Link to={"/dashboard/myCart"}>
             <button className="btn gap-2">
               <FaShoppingCart />
               <div className="badge badge-secondary">+{cart?.length || 0}</div>
@@ -82,17 +87,18 @@ const Navbar = () => {
 
           {user ? (
             <div className="flex gap-2 items-center">
-              <button
-                onClick={handleLogOut}
-                className="btn btn-info"
-              >
+              <button onClick={handleLogOut} className="btn btn-info">
                 Log Out
               </button>
               <div
                 className="tooltip tooltip-bottom"
                 data-tip={user?.displayName}
               >
-                <img className="rounded-full w-12" src={user?.photoURL} alt="" />
+                <img
+                  className="rounded-full w-12"
+                  src={user?.photoURL}
+                  alt=""
+                />
               </div>
             </div>
           ) : (

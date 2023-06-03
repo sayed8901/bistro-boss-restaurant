@@ -34,22 +34,19 @@ const DashBoard = () => {
                   <li><NavLink to={'/dashboard/adminHome'}><FaHome/> Admin Home </NavLink> </li>
                   <li><NavLink to={'/dashboard/addItem'}><FaUtensils/> Add an Item </NavLink> </li>
                   <li><NavLink to={'/dashboard/manageItems'}><FaWallet/> Manage Items </NavLink></li>
-                  <li><NavLink to={'/dashboard/manageBookings'}><FaBook/> Manage Bookings </NavLink></li> 
+                  <li><NavLink to={'/dashboard/manageBookings'}><FaBook/> Manage Bookings (ToDo) </NavLink></li> 
                   <li><NavLink to={'/dashboard/allUsers'}><FaUsers/> All Users </NavLink></li> 
                 </> 
               : <>
-                  <li><NavLink to={'/dashboard/home'}><FaHome/> User Home </NavLink> </li>
-                  <li><NavLink to={'/dashboard/reservations'}><FaCalendarAlt/> Reservations </NavLink> </li>
-                  <li><NavLink to={'/dashboard/history'}><FaWallet/> Payment History </NavLink></li>
-                  <li><NavLink to={'/dashboard/mycart'}><FaShoppingCart/> 
+                  <li><NavLink to={'/dashboard/userHome'}><FaHome/> User Home </NavLink> </li>
+                  <li><NavLink to={'/dashboard/reservations'}><FaCalendarAlt/> Reservations (ToDo) </NavLink> </li>
+                  <li><NavLink to={'/dashboard/history'}><FaWallet/> Payment History (ToDo) </NavLink></li>
+                  <li><NavLink to={'/dashboard/myCart'}><FaShoppingCart/> 
                     My Cart 
                     <span className="badge badge-secondary">+{cart?.length || 0}</span>  
                   </NavLink></li>
                 </>
           }
-
-          
-          
 
           <div className="divider"></div>
 

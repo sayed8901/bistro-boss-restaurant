@@ -33,14 +33,14 @@ const SocialLogin = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
+            navigate(fromLocation, { replace: true });
             Swal.fire({
               position: "center",
               icon: "success",
               title: "User login successful",
               showConfirmButton: false,
-              timer: 2000,
+              timer: 1500,
             });
-            navigate(fromLocation, { replace: true });
           });
       })
       .catch((error) => {

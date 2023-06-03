@@ -6,7 +6,6 @@ import Order from "../pages/Order/Order/Order";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
-import Secret from "../pages/Shared/Secret/Secret";
 import DashBoard from "../Layout/DashBoard";
 import MyCart from "../pages/DashBoard/MyCart/MyCart";
 import AllUsers from "../pages/DashBoard/MyCart/AllUsers/AllUsers";
@@ -14,6 +13,8 @@ import AddItem from "../pages/DashBoard/AddItem/AddItem";
 import AdminRoute from "./AdminRoute";
 import ManageItems from "../pages/DashBoard/ManageItems/ManageItems";
 import Payment from "../pages/DashBoard/Payment/Payment";
+import AdminHome from "../pages/DashBoard/AdminHome/AdminHome";
+import UserHome from "../pages/DashBoard/UserHome/UserHome";
 
 export const router = createBrowserRouter([
   {
@@ -40,42 +41,63 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignUp></SignUp>,
       },
-      {
-        path: "/secret",
-        element: (
-          <PrivateRoute>
-            <Secret></Secret>
-          </PrivateRoute>
-        ),
-      },
     ],
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashBoard></DashBoard>
+      </PrivateRoute>
+    ),
     children: [
-    // users routes
+      // users routes
       {
-        path: 'mycart',
-        element: <MyCart></MyCart>
+        path: "userHome",
+        element: <UserHome></UserHome>,
       },
       {
-        path: 'payment',
-        element: <Payment></Payment>
-      },
-    // admin routes
-      {
-        path: 'allUsers',
-        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+        path: "myCart",
+        element: <MyCart></MyCart>,
       },
       {
-        path: 'addItem',
-        element: <AdminRoute><AddItem></AddItem></AdminRoute>
+        path: "payment",
+        element: <Payment></Payment>,
+      },
+
+      // admin routes
+      {
+        path: "adminHome",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
       },
       {
-        path: 'manageItems',
-        element: <AdminRoute><ManageItems></ManageItems></AdminRoute>
+        path: "allUsers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
-    ]
+      {
+        path: "addItem",
+        element: (
+          <AdminRoute>
+            <AddItem></AddItem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageItems",
+        element: (
+          <AdminRoute>
+            <ManageItems></ManageItems>
+          </AdminRoute>
+        ),
+      },
+    ],
   },
 ]);
