@@ -3,11 +3,12 @@ import useCart from "../../../Hooks/useCart";
 import SectionTitle from "../../../components/SectionTitle/SectionTitle";
 import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
   console.log(cart);
-  const total = cart.reduce((sum, currentItem) => sum + currentItem.price, 0);
+  const total = (cart.reduce((sum, currentItem) => sum + currentItem.price, 0)).toFixed(2);
 
   const handleDelete = (item) => {
     Swal.fire({
@@ -51,12 +52,10 @@ const MyCart = () => {
       ></SectionTitle>
 
       <div className="my-16">
-        <div className="uppercase font-bold flex justify-around items-center mb-8">
+        <div className="uppercase font-bold flex justify-evenly items-center mb-8">
           <h3 className="text-2xl">Total Orders: {cart.length}</h3>
-          <h3 className="text-2xl">Total Price:{total}</h3>
-          <button className="btn btn-warning font-semibold text-xl">
-            Pay
-          </button>
+          <h3 className="text-2xl">Total Price: ${total}</h3>
+          <Link to={'/dashboard/payment'} className="btn btn-sm px-4 btn-warning font-semibold text-xl">Pay</Link>
         </div>
 
         <div className="overflow-x-auto w-full">

@@ -31,13 +31,11 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         Swal.fire({
-          title: "User login successful.",
-          showClass: {
-            popup: "animate__animated animate__fadeInDown",
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
+          position: "center",
+          icon: "success",
+          title: "User login successful",
+          showConfirmButton: false,
+          timer: 2000,
         });
         navigate(fromLocation, { replace: true });
       })
@@ -149,7 +147,7 @@ const Login = () => {
                 </Link>
               </small>
             </p>
-            
+
             <SocialLogin></SocialLogin>
           </div>
         </div>

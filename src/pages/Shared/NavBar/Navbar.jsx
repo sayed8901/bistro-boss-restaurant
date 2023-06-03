@@ -67,13 +67,13 @@ const Navbar = () => {
               {navOptions}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">Bistro Boss</a>
+          <Link to={'/'} className="btn btn-ghost normal-case text-xl">Bistro Boss</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end gap-2">
-          <Link to={"/dashboard/mycart"}>
+          <Link to={user ? "/dashboard/mycart" : "/menu"}>
             <button className="btn gap-2">
               <FaShoppingCart />
               <div className="badge badge-secondary">+{cart?.length || 0}</div>
