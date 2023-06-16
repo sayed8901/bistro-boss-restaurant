@@ -16,7 +16,7 @@ const useCart = () => {
     // normal fetching
 
     // queryFn: async () => {
-    //     const res = await fetch(`https://bistro-boss-server-virid.vercel.app/carts?email=${user?.email}`, {
+    //     const res = await fetch(`${import.meta.env.VITE_API_URL}/carts?email=${user?.email}`, {
     //       method: 'GET',
     //       headers: {
     //         'content-type':"application/json",

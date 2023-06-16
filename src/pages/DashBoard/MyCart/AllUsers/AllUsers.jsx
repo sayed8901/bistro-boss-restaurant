@@ -16,7 +16,7 @@ const AllUsers = () => {
   });
 
   const handleMakeAdmin = (user) => {
-    fetch(`https://bistro-boss-server-virid.vercel.app/users/admin/${user._id}`, {
+    fetch(`${import.meta.env.VITE_API_URL}/users/admin/${user._id}`, {
         method: "PATCH"
     })
     .then(res => res.json())
@@ -46,7 +46,7 @@ const AllUsers = () => {
         confirmButtonText: "Yes, delete it!",
       }).then((result) => {
         if (result.isConfirmed) {
-          fetch(`https://bistro-boss-server-virid.vercel.app/carts/${user._id}`, {
+          fetch(`${import.meta.env.VITE_API_URL}/carts/${user._id}`, {
             method: "DELETE",
           })
             .then((res) => res.json())

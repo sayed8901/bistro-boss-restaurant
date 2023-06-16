@@ -23,7 +23,7 @@ const SocialLogin = () => {
           name: loggedInUser.displayName,
           email: loggedInUser.email,
         };
-        fetch(`https://bistro-boss-server-virid.vercel.app/users`, {
+        fetch(`${import.meta.env.VITE_API_URL}/users`, {
           method: "POST",
           headers: {
             "content-type": "application/json",
