@@ -77,9 +77,9 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
-        <div className="navbar-end gap-2">
+        <div className="navbar-end gap-8">
           <Link to={"/dashboard/myCart"}>
-            <button className="btn gap-2">
+            <button className="btn btn-xs gap-2">
               <FaShoppingCart />
               <div className="badge badge-secondary">+{cart?.length || 0}</div>
             </button>
@@ -87,9 +87,6 @@ const Navbar = () => {
 
           {user ? (
             <div className="flex gap-2 items-center">
-              <button onClick={handleLogOut} className="btn btn-info">
-                Log Out
-              </button>
               <div
                 className="tooltip tooltip-bottom"
                 data-tip={user?.displayName}
@@ -100,6 +97,9 @@ const Navbar = () => {
                   alt=""
                 />
               </div>
+              <button onClick={handleLogOut} className="btn btn-sm btn-info">
+                Log Out
+              </button>
             </div>
           ) : (
             <Link className="btn btn-primary" to={"/login"}>
